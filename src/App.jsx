@@ -1,11 +1,12 @@
 import React from 'react'
 import './App.css'
+import Navbar from './components/navbar/Navbar'
 
 function App() {
 
   return (
     <>
-      <h1>React blog project</h1>
+      <Navbar />
     </>
   )
 }
