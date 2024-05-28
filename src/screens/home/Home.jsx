@@ -1,39 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import './Home.css'
 import PostCard from '../../components/postcard/PostCard';
+import useFetch from '../../hooks/useFetch';
 
 const Home = () => {
 
-    const [posts, setPosts] = useState([]);
-    const [error, setError] = useState();
-
-
-    useEffect(() => {
-        const fetchPosts = async () => {
-            const res = await fetch('https://jsonplaceholder.typicode.com/posts');
-            const data = await res.json();
-
-            if (res.ok) {
-                setPosts(data)
-                setError("")
-            }
-
-            if (!res.ok) {
-                setError(res.error)
-            }
-        }
-
-        fetchPosts();
-    }, []);
-
+    const { data, error, isLoading } = useFetch('https://jsonplaceholder.typicode.com/posts');
 
     return (
         <div className='container-home'>
             {
+                isLoading && <h3 style={{ color: "orange" }}>Loading...</h3>
+            }
+            {
                 error && <h3 style={{ color: "red" }}>{error}</h3>
             }
             {
-                posts && posts.map((post) => {
+                data && data.map((post) => {
                     return <PostCard post={post} key={post.id} />
                 })
             }
