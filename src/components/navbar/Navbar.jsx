@@ -5,11 +5,11 @@ import { Link, Outlet } from 'react-router-dom'
 const Navbar = () => {
     return (
         <>
-            <header className='container'>
-                <Link to='/'><h1>Blog</h1></Link>
+            <header className='container-navbar'>
+                <Link to='/'><h2>Blog</h2></Link>
                 <nav>
-                    <Link to='/'><h4>Home</h4></Link>
-                    <Link to='create'><h4>Create Post</h4></Link>
+                    <Link to='/'><h5>Home</h5></Link>
+                    <Link to='create'><h5>Create Post</h5></Link>
                 </nav>
             </header>
             <Outlet />
