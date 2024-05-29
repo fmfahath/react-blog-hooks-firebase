@@ -1,12 +1,15 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Createpost.css'
 import useFetch from '../../hooks/useFetch'
+import { useNavigate } from 'react-router-dom'
 
 const Createpost = () => {
 
     const [title, setTitle] = useState("")
     const [content, setContent] = useState("")
     const [validationError, setValidationError] = useState("")
+
+    const { data, error, isLoading, optionsData } = useFetch('https://jsonplaceholder.typicode.com/posts', "POST")
 
 
     const handleSubmit = (e) => {
@@ -23,8 +26,15 @@ const Createpost = () => {
 
         setValidationError('');
         // console.log({ title, body: content, userId: 1 })
+        optionsData({ title, body: content, userId: 1 })
 
+        setTitle("")
+        setContent("")
     }
+
+
+
+
     return (
         <div className='container-createpost'>
             {

@@ -1,20 +1,36 @@
 import React, { useEffect, useState } from 'react'
 
-const useFetch = (url) => {
+const useFetch = (url, method = "GET") => {
+
+    console.log("useFetch..")
 
     // 'https://jsonplaceholder.typicode.com/posts'
 
     const [data, setData] = useState([])
     const [error, setError] = useState("");
     const [isLoading, setIsLoading] = useState(false);
+    const [options, setOptions] = useState(null)
+
+
+    const optionsData = (data) => {
+        if (method === "POST") {
+            setOptions({
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                },
+            })
+        }
+    }
 
 
     useEffect(() => {
 
         setIsLoading(true)
 
-        const fetchPosts = async () => {
-            const res = await fetch(url);
+        const fetchPosts = async (options) => {
+            const res = await fetch(url, options);
             const data = await res.json();
 
             if (res.ok) {
@@ -27,12 +43,19 @@ const useFetch = (url) => {
                 setError(res.error)
                 setIsLoading(false)
             }
+        };
+
+        if (method === "GET") {
+            fetchPosts();
         }
 
-        fetchPosts();
-    }, [url]);
+        if (method === "POST") {
+            fetchPosts(options);
+        }
 
-    return { data, error, isLoading }
+    }, [url, method, options]);
+
+    return { data, error, isLoading, optionsData }
 }
 
 export default useFetch

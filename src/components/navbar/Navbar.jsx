@@ -3,6 +3,7 @@ import './Navbar.css'
 import { Link, Outlet } from 'react-router-dom'
 
 const Navbar = () => {
+    console.log("navbar...")
     return (
         <>
             <header className='container-navbar'>
