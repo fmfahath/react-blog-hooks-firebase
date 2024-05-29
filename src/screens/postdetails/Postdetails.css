@@ -56,3 +56,8 @@
     justify-content: end;
     margin-top: 50px;
 }
+
+.alert-success {
+    margin-top: 0 !important;
+    justify-content: center !important;
+}

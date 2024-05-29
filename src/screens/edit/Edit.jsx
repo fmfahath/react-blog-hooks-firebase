@@ -16,7 +16,7 @@ const Edit = () => {
     const [modifiedField, setModifiedField] = useState({});
 
     const { data, error, isLoading, optionsData } = useFetch(`https://jsonplaceholder.typicode.com/posts/${post.id}`, "PATCH")
-    console.log("Edit: ", { data, error, isLoading, optionsData })
+    // console.log("Edit: ", { data, error, isLoading, optionsData })
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {

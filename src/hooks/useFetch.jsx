@@ -31,6 +31,11 @@ const useFetch = (url, method = "GET") => {
                 },
             })
         }
+        else if (method === "DELETE") {
+            setOptions({
+                method: 'DELETE',
+            })
+        }
     }
 
 
@@ -60,7 +65,7 @@ const useFetch = (url, method = "GET") => {
             fetchPosts();
         }
 
-        if ((method === "POST" || method === "PATCH") && options) {
+        if ((method === "POST" || method === "PATCH" || method === "DELETE") && options) {
             fetchPosts(options);
         }
 

@@ -30,13 +30,13 @@ const Createpost = () => {
         // console.log({ title, body: content, userId: 1 })
         optionsData({ title, body: content, userId: 1 })
 
-        setTitle("")
-        setContent("")
     }
 
     useEffect(() => {
         if (data.length !== 0) {
             const timer = setTimeout(() => {
+                setTitle("")
+                setContent("")
                 navigate('/')
             }, 3000);
 
@@ -55,6 +55,12 @@ const Createpost = () => {
                 validationError &&
                 <div className="alert alert-danger" role="alert">
                     {validationError}
+                </div>
+            }
+            {
+                data.length !== 0 &&
+                <div className="alert alert-success" role="alert">
+                    Post Create Success!
                 </div>
             }
             <form onSubmit={handleSubmit}>
