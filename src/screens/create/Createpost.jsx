@@ -10,7 +10,9 @@ const Createpost = () => {
     const [validationError, setValidationError] = useState("")
 
     const { data, error, isLoading, optionsData } = useFetch('https://jsonplaceholder.typicode.com/posts', "POST")
+    // console.log("createpost: ", { data, error, isLoading, optionsData })
 
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -31,6 +33,18 @@ const Createpost = () => {
         setTitle("")
         setContent("")
     }
+
+    useEffect(() => {
+        if (data.length !== 0) {
+            const timer = setTimeout(() => {
+                navigate('/')
+            }, 3000);
+
+            return () => {
+                clearTimeout(timer)
+            }
+        }
+    }, [data, navigate])
 
 
 

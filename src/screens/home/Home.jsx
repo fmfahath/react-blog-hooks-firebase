@@ -1,11 +1,25 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import './Home.css'
 import PostCard from '../../components/postcard/PostCard';
 import useFetch from '../../hooks/useFetch';
 
+
+
 const Home = () => {
+    // const [data, setData] = useState([])
+    // const [error, setError] = useState("");
+    // const [isLoading, setIsLoading] = useState(false);
+
+    // useEffect(() => {
+    //     const { data, error, isLoading } = useFetch('https://jsonplaceholder.typicode.com/posts');
+    //     setData(data)
+    //     setError(error)
+    //     setIsLoading(isLoading)
+    // }, [])
 
     const { data, error, isLoading } = useFetch('https://jsonplaceholder.typicode.com/posts');
+
+
 
     return (
         <div className='container-home'>

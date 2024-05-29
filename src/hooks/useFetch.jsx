@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 
 const useFetch = (url, method = "GET") => {
 
-    console.log("useFetch..")
 
     // 'https://jsonplaceholder.typicode.com/posts'
 
@@ -13,9 +12,19 @@ const useFetch = (url, method = "GET") => {
 
 
     const optionsData = (data) => {
+        // console.log(data)
         if (method === "POST") {
             setOptions({
                 method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                },
+            })
+        }
+        else if (method === "PATCH") {
+            setOptions({
+                method: 'PATCH',
                 body: JSON.stringify(data),
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
@@ -33,6 +42,8 @@ const useFetch = (url, method = "GET") => {
             const res = await fetch(url, options);
             const data = await res.json();
 
+            // console.log("res: ", res)
+
             if (res.ok) {
                 setData(data)
                 setError("")
@@ -49,11 +60,12 @@ const useFetch = (url, method = "GET") => {
             fetchPosts();
         }
 
-        if (method === "POST") {
+        if ((method === "POST" || method === "PATCH") && options) {
             fetchPosts(options);
         }
 
     }, [url, method, options]);
+
 
     return { data, error, isLoading, optionsData }
 }

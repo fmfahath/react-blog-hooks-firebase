@@ -1,0 +1,41 @@
+.container-editpost {
+    width: 60%;
+    color: #141313;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 100px auto;
+    background-color: #FBAB7E;
+    background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    transition: 0.3s all;
+    cursor: pointer;
+}
+
+.container-editpost form div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+label {
+    color: #fff;
+}
+
+form input,
+form textarea {
+    border: none;
+    outline: none;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+form input[type=submit] {
+    padding: 10px 25px;
+    border-radius: 15px;
+}
+
+form input[type=submit]:hover {
+    color: #fff;
+    background-color: #f5600a;
+    border: 1px solid #fff;
+}
