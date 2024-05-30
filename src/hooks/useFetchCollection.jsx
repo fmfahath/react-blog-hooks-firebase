@@ -1,4 +1,4 @@
-import { collection, onSnapshot } from "firebase/firestore";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { useEffect, useState } from "react"
 import { db } from "../firebase/config";
 
@@ -7,8 +7,14 @@ export const useFetchCollection = (collectionName) => {
     const [documents, setDocuments] = useState(null);
 
     useEffect(() => {
+
         let collectionRef = collection(db, collectionName)
-        const unsub = onSnapshot(collectionRef, (snapshot) => {
+
+        //filter query
+        let queryRef = query(collectionRef, orderBy("createdAt", "desc"))
+
+        // const unsub = onSnapshot(collectionRef, (snapshot) => {
+        const unsub = onSnapshot(queryRef, (snapshot) => {
             let result = []
 
             snapshot.docs.forEach((doc) => {
