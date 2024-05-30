@@ -1,9 +1,12 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Postdetails.css'
 import { useLocation, useNavigate } from 'react-router-dom'
-import useFetch from '../../hooks/useFetch';
 
 const Postdetails = () => {
+
+    const [data, setData] = useState("")
+    const [error, setError] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
 
     const location = useLocation();
     const { state: post } = location;
@@ -11,15 +14,14 @@ const Postdetails = () => {
 
     const navigate = useNavigate();
 
-    const { data, error, optionsData } = useFetch(`https://jsonplaceholder.typicode.com/posts/${post.id}`, "DELETE");
-    // console.log("delete: ", { data, error, optionsData })
+
 
     const handleEdit = () => {
         navigate(`/edit/${post.id}`, { state: post });
     }
 
     const handleDelete = () => {
-        optionsData();
+        // optionsData();
     }
 
     useEffect(() => {

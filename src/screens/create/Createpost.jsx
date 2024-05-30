@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import './Createpost.css'
-import useFetch from '../../hooks/useFetch'
 import { useNavigate } from 'react-router-dom'
 
 const Createpost = () => {
 
+    const [data, setData] = useState("")
     const [title, setTitle] = useState("")
     const [content, setContent] = useState("")
     const [validationError, setValidationError] = useState("")
 
-    const { data, error, isLoading, optionsData } = useFetch('https://jsonplaceholder.typicode.com/posts', "POST")
-    // console.log("createpost: ", { data, error, isLoading, optionsData })
+
 
     const navigate = useNavigate();
 
@@ -28,7 +27,7 @@ const Createpost = () => {
 
         setValidationError('');
         // console.log({ title, body: content, userId: 1 })
-        optionsData({ title, body: content, userId: 1 })
+        // optionsData({ title, body: content, userId: 1 })
 
     }
 

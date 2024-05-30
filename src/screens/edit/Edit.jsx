@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './Edit.css'
 import { useLocation, useNavigate } from 'react-router-dom'
-import useFetch from '../../hooks/useFetch';
+
 
 const Edit = () => {
 
@@ -14,9 +14,10 @@ const Edit = () => {
     const [content, setContent] = useState("")
     const [validationError, setValidationError] = useState("")
     const [modifiedField, setModifiedField] = useState({});
+    const [data, setData] = useState("")
+    const [error, setError] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
 
-    const { data, error, isLoading, optionsData } = useFetch(`https://jsonplaceholder.typicode.com/posts/${post.id}`, "PATCH")
-    // console.log("Edit: ", { data, error, isLoading, optionsData })
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
@@ -33,7 +34,7 @@ const Edit = () => {
 
         setValidationError('');
         // console.log(modifiedField)
-        optionsData(modifiedField)
+        // optionsData(modifiedField)
 
 
     }
