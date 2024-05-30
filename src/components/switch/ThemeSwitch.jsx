@@ -15,7 +15,6 @@ const ThemeSwitch = () => {
             dispatch({ type: 'LIGHT' })
         }
 
-        console.log(theme)
     }
 
     return (

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './App.css'
 import Navbar from './components/navbar/Navbar'
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom'
@@ -6,6 +6,7 @@ import Home from './screens/home/Home'
 import Createpost from './screens/create/Createpost'
 import Postdetails from './screens/postdetails/Postdetails'
 import Edit from './screens/edit/Edit'
+import { ThemeContext } from './context/ThemeContext'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -20,9 +21,14 @@ const router = createBrowserRouter(
 
 function App() {
 
+  const { theme } = useContext(ThemeContext);
+  // console.log(theme)
+
   return (
     <>
-      <RouterProvider router={router} />
+      <div className={`${theme}`}>
+        <RouterProvider router={router} />
+      </div>
     </>
   )
 }
