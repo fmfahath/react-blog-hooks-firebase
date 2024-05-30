@@ -3,31 +3,35 @@ import './Home.css'
 import PostCard from '../../components/postcard/PostCard';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../firebase/config';
+import { useFetchCollection } from '../../hooks/useFetchCollection';
 
 
 
 const Home = () => {
-    const [data, setData] = useState([])
+    // const [data, setData] = useState('')
     const [error, setError] = useState("");
     const [isLoading, setIsLoading] = useState(false);
 
 
-    useEffect(() => {
-        const collectionRef = collection(db, "posts");
+    // useEffect(() => {
+    //     const collectionRef = collection(db, "posts");
 
-        getDocs(collectionRef)
-            .then((snapshot) => {
-                let result = []
+    //     getDocs(collectionRef)
+    //         .then((snapshot) => {
+    //             let result = []
 
-                snapshot.docs.forEach((doc) => {
-                    result.push({ ...doc.data(), id: doc.id })
-                    setData(result)
-                })
-            })
-            .catch((err) => console.log(err))
+    //             snapshot.docs.forEach((doc) => {
+    //                 result.push({ ...doc.data(), id: doc.id })
+    //                 setData(result)
+    //             })
+    //         })
+    //         .catch((err) => console.log(err))
 
-    }, [])
+    // }, [])
 
+    // -----------------------------------------------------
+
+    const { documents: data } = useFetchCollection("posts");
 
     return (
         <div className='container-home'>

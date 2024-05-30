@@ -22,7 +22,7 @@ const router = createBrowserRouter(
 function App() {
 
   const { theme } = useContext(ThemeContext);
-  // console.log(theme)
+  // console.log(theme)   
 
   return (
     <>
