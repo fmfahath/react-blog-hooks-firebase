@@ -9,6 +9,7 @@
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     transition: 0.3s all;
     cursor: pointer;
+    position: relative;
 }
 
 .container-postcard:hover {
@@ -28,4 +29,11 @@
 
 .container-postcard:hover h5 {
     color: #ffffff;
+}
+
+.container-postcard small {
+    position: absolute;
+    bottom: 5px;
+    right: 40px;
+    color: #6d6c6c;
 }
