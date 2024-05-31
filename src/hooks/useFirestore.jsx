@@ -1,4 +1,4 @@
-import { addDoc, collection, deleteDoc, doc, serverTimestamp } from "firebase/firestore"
+import { addDoc, collection, deleteDoc, doc, serverTimestamp, updateDoc } from "firebase/firestore"
 import { useState } from "react"
 import { db } from "../firebase/config"
 
@@ -10,7 +10,7 @@ export const useFirestore = (collectionName) => {
 
     const collectionRef = collection(db, collectionName)
 
-    //create post   
+    //create document   
     const addDocument = async (documentObject) => {
 
         try {
@@ -24,12 +24,12 @@ export const useFirestore = (collectionName) => {
     }
 
 
-    //delete post
+    //delete document
     const deleteDocument = async (id) => {
         const documentRef = doc(db, collectionName, id)
 
         try {
-            const res = await deleteDoc(documentRef);
+            await deleteDoc(documentRef);
             setStatus(true)
         } catch (error) {
             console.log("document delete error: ", error)
@@ -37,6 +37,20 @@ export const useFirestore = (collectionName) => {
         }
     }
 
-    return { addDocument, document, error, deleteDocument, status }
+    //update document
+    const updateDocument = async (documentObject, id) => {
+        const documentRef = doc(db, collectionName, id)
+
+        try {
+            await updateDoc(documentRef, { ...documentObject, createdAt: serverTimestamp() })
+            setStatus(true)
+        } catch (error) {
+            console.log("document update error: ", error)
+            setError(error.message)
+        }
+
+    }
+
+    return { addDocument, document, error, deleteDocument, status, updateDocument }
 
 }

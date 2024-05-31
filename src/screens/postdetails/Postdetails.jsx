@@ -25,8 +25,6 @@ const Postdetails = () => {
         if (status) {
             const timer = setTimeout(() => {
                 navigate('/')
-                console.log("useEff - navi...")
-
             }, 3000);
 
             return () => {
@@ -34,7 +32,6 @@ const Postdetails = () => {
             }
         }
 
-        console.log("useEff end..")
     }, [status, navigate])
 
     return (

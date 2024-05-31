@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './Edit.css'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { useFirestore } from '../../hooks/useFirestore';
 
 
 const Edit = () => {
@@ -14,11 +15,10 @@ const Edit = () => {
     const [content, setContent] = useState("")
     const [validationError, setValidationError] = useState("")
     const [modifiedField, setModifiedField] = useState({});
-    const [data, setData] = useState("")
-    const [error, setError] = useState("");
-    const [isLoading, setIsLoading] = useState(false);
 
     const navigate = useNavigate();
+
+    const { updateDocument, status, error } = useFirestore("posts");
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -33,16 +33,15 @@ const Edit = () => {
         }
 
         setValidationError('');
-        // console.log(modifiedField)
-        // optionsData(modifiedField)
+
+        updateDocument(modifiedField, post.id);
 
 
     }
 
     useEffect(() => {
-        setTitle(post.title);
-        setContent(post.body);
-        if (data.length !== 0) {
+
+        if (status) {
             const timer = setTimeout(() => {
                 setTitle("")
                 setContent("")
@@ -53,7 +52,12 @@ const Edit = () => {
                 clearTimeout(timer)
             }
         }
-    }, [data, navigate, post.title, post.body])
+        else {
+            setTitle(post.title);
+            setContent(post.body);
+        }
+
+    }, [status, navigate, post.title, post.body])
 
 
     const onTitleChange = (e) => {
@@ -75,7 +79,7 @@ const Edit = () => {
                 </div>
             }
             {
-                data.length !== 0 &&
+                status &&
                 <div className="alert alert-success" role="alert">
                     Post Update Success!
                 </div>
