@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import './Postdetails.css'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { useFirestore } from '../../hooks/useFirestore'
 
 const Postdetails = () => {
-
-    const [data, setData] = useState("")
-    const [error, setError] = useState("");
-    const [isLoading, setIsLoading] = useState(false);
 
     const location = useLocation();
     const { state: post } = location;
@@ -14,32 +11,36 @@ const Postdetails = () => {
 
     const navigate = useNavigate();
 
-
+    const { error, deleteDocument, status } = useFirestore("posts");
 
     const handleEdit = () => {
         navigate(`/edit/${post.id}`, { state: post });
     }
 
     const handleDelete = () => {
-        // optionsData();
+        deleteDocument(post.id);
     }
 
     useEffect(() => {
-        if (data.length !== 0) {
+        if (status) {
             const timer = setTimeout(() => {
                 navigate('/')
+                console.log("useEff - navi...")
+
             }, 3000);
 
             return () => {
                 clearTimeout(timer)
             }
         }
-    }, [data, navigate])
+
+        console.log("useEff end..")
+    }, [status, navigate])
 
     return (
         <div className='container-postdetails'>
             {
-                data.length !== 0 &&
+                status &&
                 <div className="alert alert-success" role="alert">
                     Post Delete Success!
                 </div>
