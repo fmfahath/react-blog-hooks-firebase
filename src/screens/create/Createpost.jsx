@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import './Createpost.css'
 import { useNavigate } from 'react-router-dom'
+import { useFirestore } from '../../hooks/useFirestore'
 
 const Createpost = () => {
 
-    const [data, setData] = useState("")
     const [title, setTitle] = useState("")
     const [content, setContent] = useState("")
-    const [validationError, setValidationError] = useState("")
-
-
 
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const { addDocument, document, error } = useFirestore("posts")
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (!title) {
@@ -25,14 +24,14 @@ const Createpost = () => {
             return
         }
 
-        setValidationError('');
         // console.log({ title, body: content, userId: 1 })
-        // optionsData({ title, body: content, userId: 1 })
+
+        addDocument({ title, body: content, userId: 1 })
 
     }
 
     useEffect(() => {
-        if (data.length !== 0) {
+        if (document) {
             const timer = setTimeout(() => {
                 setTitle("")
                 setContent("")
@@ -43,7 +42,7 @@ const Createpost = () => {
                 clearTimeout(timer)
             }
         }
-    }, [data, navigate])
+    }, [document, navigate])
 
 
 
@@ -51,13 +50,13 @@ const Createpost = () => {
     return (
         <div className='container-createpost'>
             {
-                validationError &&
+                error &&
                 <div className="alert alert-danger" role="alert">
-                    {validationError}
+                    {error}
                 </div>
             }
             {
-                data.length !== 0 &&
+                document &&
                 <div className="alert alert-success" role="alert">
                     Post Create Success!
                 </div>

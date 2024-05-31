@@ -14,7 +14,7 @@ const PostCard = ({ post }) => {
         <div className='container-postcard' onClick={handleClick}>
             <h5>{post.title}</h5>
             <p>{post.body}</p>
-            <small><i>{moment(post.createdAt.toDate()).calendar()}</i></small>
+            {post.createdAt && <small><i>{moment(post.createdAt.toDate()).calendar()}</i></small>}
         </div>
     )
 }
