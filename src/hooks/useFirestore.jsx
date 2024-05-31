@@ -50,7 +50,6 @@ export const useFirestore = (collectionName) => {
         }
 
     }
-
     return { addDocument, document, error, deleteDocument, status, updateDocument }
 
 }

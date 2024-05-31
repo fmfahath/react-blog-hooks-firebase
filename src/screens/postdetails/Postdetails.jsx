@@ -12,7 +12,6 @@ const Postdetails = () => {
     const navigate = useNavigate();
 
     const { error, deleteDocument, status } = useFirestore("posts");
-
     const handleEdit = () => {
         navigate(`/edit/${post.id}`, { state: post });
     }

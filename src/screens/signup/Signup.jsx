@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Signup.css'
+import { useSignup } from '../../hooks/useSignup'
+import { useNavigate } from 'react-router-dom'
 
 const Signup = () => {
 
@@ -8,14 +10,29 @@ const Signup = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [validationError, setValidationError] = useState(null)
+    const navigate = useNavigate();
 
+    const { signup, error, status } = useSignup();
 
     const handleSubmit = (e) => {
         e.preventDefault();
         // console.log("sumbit", { fname, lname, email, password })
 
-
+        signup({ fname, lname, email, password });
     }
+
+    useEffect(() => {
+        if (status) {
+            const timer = setTimeout(() => {
+                navigate('/');
+            }, 3000);
+
+            return () => {
+                clearTimeout(timer)
+            }
+        }
+    }, [status, error]);
+
     return (
         <div className='container-signup'>
             <h2>Signup</h2>
@@ -23,6 +40,18 @@ const Signup = () => {
                 validationError &&
                 <div className="alert alert-danger" role="alert">
                     {validationError}
+                </div>
+            }
+            {
+                error &&
+                <div className="alert alert-danger" role="alert">
+                    {error}
+                </div>
+            }
+            {
+                status &&
+                <div className="alert alert-success" role="alert">
+                    Account Created Successfully!
                 </div>
             }
             <form onSubmit={handleSubmit}>
