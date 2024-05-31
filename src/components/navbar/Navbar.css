@@ -34,9 +34,25 @@
 .container-navbar nav {
     display: flex;
     flex-direction: row;
+    align-items: center;
     gap: 20px;
 }
 
 .container-navbar nav a {
     color: #333;
+}
+
+.container-navbar button {
+    border: none;
+    outline: none;
+    padding: 10px 25px;
+    border-radius: 15px;
+    background-color: #f5600a;
+    color: #fff;
+}
+
+.container-navbar button:hover {
+    color: #ff5e00;
+    background-color: #fff;
+    border: 2px solid #f5600a;
 }

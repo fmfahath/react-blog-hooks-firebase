@@ -7,6 +7,8 @@ import Createpost from './screens/create/Createpost'
 import Postdetails from './screens/postdetails/Postdetails'
 import Edit from './screens/edit/Edit'
 import { ThemeContext } from './context/ThemeContext'
+import Login from './screens/login/Login'
+import Signup from './screens/signup/Signup'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -15,6 +17,8 @@ const router = createBrowserRouter(
       <Route path='create' element={<Createpost />} />
       <Route path='edit/:id' element={<Edit />} />
       <Route path='post/:id' element={<Postdetails />} />
+      <Route path='login' element={<Login />} />
+      <Route path='signup' element={<Signup />} />
     </Route>
   )
 )

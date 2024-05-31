@@ -16,6 +16,9 @@ const Navbar = () => {
                 <nav>
                     <Link to='/'><h5>Home</h5></Link>
                     <Link to='create'><h5>Create Post</h5></Link>
+                    <Link to='login'><h5>Login</h5></Link>
+                    <Link to='signup'><h5>Signup</h5></Link>
+                    <button>Logout</button>
                 </nav>
             </header >
             <Outlet />
