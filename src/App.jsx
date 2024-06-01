@@ -9,6 +9,7 @@ import Edit from './screens/edit/Edit'
 import { ThemeContext } from './context/ThemeContext'
 import Login from './screens/login/Login'
 import Signup from './screens/signup/Signup'
+import Dashboard from './screens/dashboard/Dashboard'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -19,6 +20,7 @@ const router = createBrowserRouter(
       <Route path='post/:id' element={<Postdetails />} />
       <Route path='login' element={<Login />} />
       <Route path='signup' element={<Signup />} />
+      <Route path='dashboard' element={<Dashboard />} />
     </Route>
   )
 )

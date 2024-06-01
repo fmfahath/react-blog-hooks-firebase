@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword } from "firebase/auth"
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth"
 import { useState } from "react"
 import { auth, db } from "../firebase/config"
 import { doc, serverTimestamp, setDoc } from "firebase/firestore"
@@ -7,6 +7,7 @@ export const useAuthentication = () => {
     const [error, setError] = useState(null)
     const [status, setStatus] = useState(false)
 
+    //signup--------------------------
     const signup = ({ fname, lname, email, password }) => {
         setError(null)
         setStatus(false)
@@ -26,5 +27,23 @@ export const useAuthentication = () => {
             })
     }
 
-    return { signup, error, status }
+    //signin-----------------------------
+    const sigin = ({ email, password }) => {
+        setError(null)
+        setStatus(false)
+
+        signInWithEmailAndPassword(auth, email, password)
+            .then((credentials) => {
+                const user = credentials.user
+                // console.log(user.uid)
+                setStatus(true)
+
+            })
+            .catch((error) => {
+                console.log(error.message)
+                setError(error.message)
+            })
+    }
+
+    return { signup, sigin, error, status }
 }

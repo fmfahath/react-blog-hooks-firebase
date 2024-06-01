@@ -10,26 +10,21 @@ const Login = () => {
     const [validationError, setValidationError] = useState(null)
     const navigate = useNavigate();
 
-    // const { signup, error, status } = useAuthentication();
+    const { sigin, error, status } = useAuthentication();
 
     const handleSubmit = (e) => {
         e.preventDefault();
         // console.log("sumbit", { fname, lname, email, password })
 
-        // signup({ fname, lname, email, password });
+        sigin({ email, password });
     }
 
-    // useEffect(() => {
-    //     if (status) {
-    //         const timer = setTimeout(() => {
-    //             navigate('/');
-    //         }, 3000);
+    useEffect(() => {
+        if (status) {
+            navigate('/dashboard');
 
-    //         return () => {
-    //             clearTimeout(timer)
-    //         }
-    //     }
-    // }, [status, error]);
+        }
+    }, [status, error]);
 
     return (
         <div className='container-signup'>
@@ -40,12 +35,12 @@ const Login = () => {
                     {validationError}
                 </div>
             }
-            {/* {
+            {
                 error &&
                 <div className="alert alert-danger" role="alert">
                     {error}
                 </div>
-            } */}
+            }
             <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor='email'>Email</label>
