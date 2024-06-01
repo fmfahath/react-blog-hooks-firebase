@@ -1,12 +1,21 @@
 import React, { useContext } from 'react'
 import './Navbar.css'
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet, useNavigate } from 'react-router-dom'
 import ThemeSwitch from '../switch/ThemeSwitch'
 import { ThemeContext } from '../../context/ThemeContext'
+import { useAuthentication } from '../../hooks/useAuthentication'
 
 const Navbar = () => {
 
     const { theme } = useContext(ThemeContext);
+
+    const { logout } = useAuthentication();
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        logout();
+        navigate('/login')
+    }
 
     return (
         <>
@@ -18,7 +27,7 @@ const Navbar = () => {
                     <Link to='create'><h5>Create Post</h5></Link>
                     <Link to='login'><h5>Login</h5></Link>
                     <Link to='signup'><h5>Signup</h5></Link>
-                    <button>Logout</button>
+                    <button onClick={handleLogout}>Logout</button>
                 </nav>
             </header >
             <Outlet />
