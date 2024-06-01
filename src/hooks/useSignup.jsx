@@ -1,6 +1,7 @@
 import { createUserWithEmailAndPassword } from "firebase/auth"
 import { useState } from "react"
-import { auth } from "../firebase/config"
+import { auth, db } from "../firebase/config"
+import { doc, serverTimestamp, setDoc } from "firebase/firestore"
 
 export const useSignup = () => {
     const [error, setError] = useState(null)
@@ -14,6 +15,10 @@ export const useSignup = () => {
             .then((credentials) => {
                 const user = credentials.user
                 setStatus(true)
+
+                // create new collection "users" using user ID
+                const docRef = doc(db, "users", user.uid)
+                setDoc(docRef, { fname, lname, createdAt: serverTimestamp() })
             })
             .catch((error) => {
                 console.log(error.message)
