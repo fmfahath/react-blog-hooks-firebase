@@ -3,7 +3,7 @@ import { useState } from "react"
 import { auth, db } from "../firebase/config"
 import { doc, serverTimestamp, setDoc } from "firebase/firestore"
 
-export const useSignup = () => {
+export const useAuthentication = () => {
     const [error, setError] = useState(null)
     const [status, setStatus] = useState(false)
 

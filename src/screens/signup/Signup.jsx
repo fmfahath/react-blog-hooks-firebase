@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './Signup.css'
-import { useSignup } from '../../hooks/useSignup'
 import { useNavigate } from 'react-router-dom'
+import { useAuthentication } from '../../hooks/useAuthentication'
 
 const Signup = () => {
 
@@ -12,7 +12,7 @@ const Signup = () => {
     const [validationError, setValidationError] = useState(null)
     const navigate = useNavigate();
 
-    const { signup, error, status } = useSignup();
+    const { signup, error, status } = useAuthentication();
 
     const handleSubmit = (e) => {
         e.preventDefault();
