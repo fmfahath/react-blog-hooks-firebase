@@ -13,13 +13,14 @@ const userReducer = (state, action) => {
     }
 }
 
-export const AuthContextProvider = ({ childeren }) => {
+export const AuthContextProvider = ({ children }) => {
 
     const [state, dispatch] = useReducer(userReducer, { user: null })
+    console.log("Auth State: ", state)
 
     return (
         <AuthContext.Provider value={{ ...state, dispatch }}>
-            {childeren}
+            {children}
         </AuthContext.Provider >
     )
 }

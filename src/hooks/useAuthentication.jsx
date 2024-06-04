@@ -2,10 +2,14 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } f
 import { useState } from "react"
 import { auth, db } from "../firebase/config"
 import { doc, serverTimestamp, setDoc } from "firebase/firestore"
+import { useAuthContext } from "./useAuthContext"
 
 export const useAuthentication = () => {
     const [error, setError] = useState(null)
     const [status, setStatus] = useState(false)
+
+
+    const { dispatch } = useAuthContext();
 
     //signup--------------------------
     const signup = ({ fname, lname, email, password }) => {
@@ -37,6 +41,8 @@ export const useAuthentication = () => {
                 const user = credentials.user
                 console.log(user.uid)
                 setStatus(true)
+                dispatch({ type: 'LOGIN', payload: user })
+
 
             })
             .catch((error) => {
@@ -50,6 +56,8 @@ export const useAuthentication = () => {
         signOut(auth)
             .then((response) => {
                 console.log("Successfully logout")
+                dispatch({ type: 'LOGOUT' })
+
             })
             .catch((error) => {
                 console.log(error.message)
