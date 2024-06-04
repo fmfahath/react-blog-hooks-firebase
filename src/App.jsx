@@ -17,7 +17,7 @@ import { useAuthContext } from './hooks/useAuthContext'
 
 function App() {
 
-  const { user } = useAuthContext();
+  const { user, isAuthReady } = useAuthContext();
 
   const { theme } = useContext(ThemeContext);
 
@@ -38,7 +38,8 @@ function App() {
   return (
     <>
       <div className={`${theme}`}>
-        <RouterProvider router={router} />
+        {/* isAuthReady - prevent login page displayed while refreshing page */}
+        {isAuthReady && <RouterProvider router={router} />}
       </div>
     </>
   )

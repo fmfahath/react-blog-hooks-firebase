@@ -39,7 +39,7 @@ export const useAuthentication = () => {
         signInWithEmailAndPassword(auth, email, password)
             .then((credentials) => {
                 const user = credentials.user
-                console.log(user.uid)
+                // console.log(user.uid)
                 setStatus(true)
                 dispatch({ type: 'LOGIN', payload: user })
 
