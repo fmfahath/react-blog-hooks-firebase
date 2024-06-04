@@ -20,12 +20,11 @@ const userReducer = (state, action) => {
 export const AuthContextProvider = ({ children }) => {
 
     const [state, dispatch] = useReducer(userReducer, { user: null, isAuthReady: false })
-    console.log("Auth State: ", state)
+    // console.log("Auth State: ", state)
 
     //prevent refresh - logout issue
     useEffect(() => {
         const unsub = onAuthStateChanged(auth, (user) => {
-            console.log("onAuth: ", user)
             dispatch({ type: 'IS_AUTH_READY', payload: user })
 
             unsub();

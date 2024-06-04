@@ -2,8 +2,11 @@ import React, { useEffect, useState } from 'react'
 import './Createpost.css'
 import { useNavigate } from 'react-router-dom'
 import { useFirestore } from '../../hooks/useFirestore'
+import { useAuthContext } from '../../hooks/useAuthContext'
 
 const Createpost = () => {
+
+    const { user } = useAuthContext()
 
     const [title, setTitle] = useState("")
     const [content, setContent] = useState("")
@@ -26,7 +29,7 @@ const Createpost = () => {
 
         // console.log({ title, body: content, userId: 1 })
 
-        addDocument({ title, body: content, userId: 1 })
+        addDocument({ title, body: content, userId: user.uid })
 
     }
 

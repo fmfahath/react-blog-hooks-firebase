@@ -2,12 +2,15 @@ import React, { useEffect, useState } from 'react'
 import './Postdetails.css'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useFirestore } from '../../hooks/useFirestore'
+import { useAuthContext } from '../../hooks/useAuthContext'
 
 const Postdetails = () => {
 
+    const { user } = useAuthContext();
+
     const location = useLocation();
     const { state: post } = location;
-    // console.log("post: ", location)
+
 
     const navigate = useNavigate();
 
@@ -49,10 +52,13 @@ const Postdetails = () => {
             }
             <h5>{post.title}</h5>
             <p>{post.body}</p>
-            <div>
-                <button id='edit' onClick={handleEdit}>Edit</button>
-                <button id='delete' onClick={handleDelete}>Delete</button>
-            </div>
+
+            {user.uid === post.userId ?
+                <div>
+                    <button id='edit' onClick={handleEdit} >Edit</button>
+                    <button id='delete' onClick={handleDelete} >Delete</button>
+                </div>
+                : <></>}
         </div>
     )
 }
