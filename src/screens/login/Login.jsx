@@ -19,12 +19,12 @@ const Login = () => {
         sigin({ email, password });
     }
 
-    useEffect(() => {
-        if (status) {
-            navigate('/dashboard');
+    // useEffect(() => {
+    //     if (status) {
+    //         navigate('/');
 
-        }
-    }, [status, error]);
+    //     }
+    // }, [status, error]);
 
     return (
         <div className='container-signup'>

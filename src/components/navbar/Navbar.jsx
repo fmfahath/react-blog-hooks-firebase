@@ -4,9 +4,11 @@ import { Link, Outlet, useNavigate } from 'react-router-dom'
 import ThemeSwitch from '../switch/ThemeSwitch'
 import { ThemeContext } from '../../context/ThemeContext'
 import { useAuthentication } from '../../hooks/useAuthentication'
+import { useAuthContext } from '../../hooks/useAuthContext'
 
 const Navbar = () => {
 
+    const { user } = useAuthContext();
     const { theme } = useContext(ThemeContext);
 
     const { logout } = useAuthentication();
@@ -23,11 +25,11 @@ const Navbar = () => {
                 <Link to='/'><h2>Blog</h2></Link>
                 <ThemeSwitch />
                 <nav>
-                    <Link to='/'><h5>Home</h5></Link>
-                    <Link to='create'><h5>Create Post</h5></Link>
-                    <Link to='login'><h5>Login</h5></Link>
-                    <Link to='signup'><h5>Signup</h5></Link>
-                    <button onClick={handleLogout}>Logout</button>
+                    {user && <Link to='/'><h5>Home</h5></Link>}
+                    {user && <Link to='create'><h5>Create Post</h5></Link>}
+                    {!user && <Link to='login'><h5>Login</h5></Link>}
+                    {!user && <Link to='signup'><h5>Signup</h5></Link>}
+                    {user && <button onClick={handleLogout}>Logout</button>}
                 </nav>
             </header >
             <Outlet />
